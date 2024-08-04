@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IStorageService {
     void storeEvents(List<Event> events);
+
+    List<Event> getAllEvents();
 }

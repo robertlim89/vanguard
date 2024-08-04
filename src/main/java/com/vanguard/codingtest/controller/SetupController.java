@@ -1,15 +1,13 @@
 package com.vanguard.codingtest.controller;
 
 import com.vanguard.codingtest.service.EventStorageService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class ParseController {
+public class SetupController {
     private final EventStorageService eventStorageService;
 
-    public ParseController(EventStorageService eventStorageService) {
+    public SetupController(EventStorageService eventStorageService) {
         this.eventStorageService = eventStorageService;
     }
 
@@ -18,7 +16,7 @@ public class ParseController {
         return "Greetings from Spring Boot index v1!";
     }
 
-    @PostMapping("/v1/setup")
+    @PostMapping(value = "/v1/setup")
     public void setup() {
         eventStorageService.loadEvents();
     }
