@@ -2,5 +2,13 @@ package com.vanguard.codingtest.model;
 
 public enum LogicalOperation {
     OR,
-    AND
+    AND;
+
+    @Override
+    public String toString() {
+        return switch(this) {
+            case OR -> "||";
+            case AND -> "&&";
+        };
+    }
 }

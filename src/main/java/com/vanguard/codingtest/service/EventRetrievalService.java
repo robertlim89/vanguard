@@ -20,7 +20,7 @@ public class EventRetrievalService {
                             new Query<>("premiumCurrency", "AUD", ComparisonOperation.EQUALS)
                     )),
                     new Query<String>(LogicalOperation.AND, List.of(
-                            new Query<>("buyerParty", "BISON_BANK", ComparisonOperation.EQUALS),
+                            new Query<>("sellerParty", "BISON_BANK", ComparisonOperation.EQUALS),
                             new Query<>("premiumCurrency", "USD", ComparisonOperation.EQUALS)
                     ))
             ));

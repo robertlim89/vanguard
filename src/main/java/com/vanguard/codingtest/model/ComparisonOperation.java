@@ -3,7 +3,7 @@ package com.vanguard.codingtest.model;
 import java.util.function.Predicate;
 
 public enum ComparisonOperation {
-    EQUALS("="),
+    EQUALS("=="),
     GREATER_THAN(">"),
     LESS_THAN("<");
 
@@ -23,6 +23,6 @@ public enum ComparisonOperation {
 
     @Override
     public String toString() {
-        return "arg %s value".formatted(value);
+        return value;
     }
 }

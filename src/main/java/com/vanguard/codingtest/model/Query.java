@@ -44,5 +44,20 @@ public record Query<T extends Comparable<T>> (LogicalOperation logicalOperation,
         }
         return identity;
     }
+
+
+    @Override
+    public String toString() {
+        var sb = new StringBuilder();
+        if (property != null && comparison != null && value != null) {
+            sb.append("(%s %s %s)".formatted(property, comparison.toString(), value));
+        }
+        if (!queries.isEmpty()) {
+            var joiner = " %s ".formatted(logicalOperation.toString());
+            if (!sb.isEmpty()) sb.append(joiner);
+            sb.append("(%s)".formatted(String.join(joiner, queries.stream().map(Query::toString).toList())));
+        }
+        return sb.toString();
+    }
 }
 
