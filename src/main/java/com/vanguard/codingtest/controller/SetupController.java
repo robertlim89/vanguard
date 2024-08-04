@@ -11,13 +11,8 @@ public class SetupController {
         this.eventStorageService = eventStorageService;
     }
 
-    @GetMapping("/v1/index")
-    public String index() {
-        return "Greetings from Spring Boot index v1!";
-    }
-
     @PostMapping(value = "/v1/setup")
-    public void setup() {
-        eventStorageService.loadEvents();
+    public String setup() {
+        return "%s events loaded".formatted(eventStorageService.loadEvents());
     }
 }

@@ -5,7 +5,7 @@ import com.vanguard.codingtest.model.Event;
 import java.util.List;
 
 public interface IStorageService {
-    void storeEvents(List<Event> events);
+    int storeEvents(List<Event> events);
 
     List<Event> getAllEvents();
 }

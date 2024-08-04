@@ -17,8 +17,8 @@ public class DbStorageService implements IStorageService {
     }
 
     @Override
-    public void storeEvents(List<Event> events) {
-        eventRepository.saveAll(events);
+    public int storeEvents(List<Event> events) {
+        return eventRepository.saveAll(events).size();
     }
 
     @Override

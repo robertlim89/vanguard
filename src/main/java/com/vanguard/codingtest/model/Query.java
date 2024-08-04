@@ -15,34 +15,34 @@ public record Query<T extends Comparable<T>> (LogicalOperation logicalOperation,
     }
 
     public Predicate<Event> evaluate() {
-        if (!queries.isEmpty()) {
-            Predicate<Event> identity;
-            BinaryOperator<Predicate<Event>> reducer;
-            switch (logicalOperation) {
-                default:
-                case OR: {
-                    identity = a -> false;
-                    reducer = Predicate::or;
-                    break;
-                }
-                case AND: {
-                    identity = a -> true;
-                    reducer = Predicate::and;
-                }
-            }
-            return queries.stream()
-                    .map(Query::evaluate)
-                    .reduce(identity, reducer);
-        } else if (property != null && value != null && comparison != null) {
-            return switch(property) {
+        Predicate<Event> identity;
+        if (property != null && value != null && comparison != null) {
+            identity = switch(property) {
                 case "sellerParty" -> event -> comparison.toPredicate(value).test((T) event.getSellerParty());
                 case "buyerParty" -> event -> comparison.toPredicate(value).test((T) event.getBuyerParty());
                 case "premiumCurrency" -> event -> comparison.toPredicate(value).test((T) event.getPremiumCurrency());
                 case "premiumAmount" -> event -> comparison.toPredicate(value).test((T) Double.valueOf(event.getPremiumAmount()));
                 default -> throw new IllegalArgumentException("Unknown property: %s".formatted(property));
             };
+        } else {
+            identity = switch (logicalOperation) {
+                case AND -> a -> true;
+                case OR -> a -> false;
+                case null -> a -> false;
+            };
         }
-        throw new IllegalArgumentException("Unknown query: %s".formatted(this));
+
+        if (!queries.isEmpty()) {
+            BinaryOperator<Predicate<Event>> reducer = switch (logicalOperation) {
+                case AND -> Predicate::and;
+                case OR -> Predicate::or;
+                case null -> Predicate::or;
+            };
+            return queries.stream()
+                    .map(Query::evaluate)
+                    .reduce(identity, reducer);
+        }
+        return identity;
     }
 }
 
