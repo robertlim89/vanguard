@@ -9,6 +9,7 @@ public class SetupController {
 
     public SetupController(EventStorageService eventStorageService) {
         this.eventStorageService = eventStorageService;
+        eventStorageService.loadEvents();
     }
 
     @PostMapping(value = "/v1/setup")
