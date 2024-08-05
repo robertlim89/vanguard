@@ -25,7 +25,13 @@ public class Event extends AbstractPersistable<Long> {
         this.premiumAmount = premiumAmount;
     }
 
-
+    public Event(String sellerParty, String buyerParty, String premiumCurrency, double premiumAmount, Long id) {
+        this.setId(id);
+        this.sellerParty = sellerParty;
+        this.buyerParty = buyerParty;
+        this.premiumCurrency = premiumCurrency;
+        this.premiumAmount = premiumAmount;
+    }
 
     public String getSellerParty() {
         return sellerParty;

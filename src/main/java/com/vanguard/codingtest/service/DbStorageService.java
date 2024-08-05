@@ -1,7 +1,7 @@
 package com.vanguard.codingtest.service;
 
 import com.vanguard.codingtest.model.Event;
-import com.vanguard.codingtest.service.interfaces.EventRepository;
+import com.vanguard.codingtest.service.interfaces.IEventRepository;
 import com.vanguard.codingtest.service.interfaces.IStorageService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class DbStorageService implements IStorageService {
 
-    private final EventRepository eventRepository;
+    private final IEventRepository eventRepository;
 
-    public DbStorageService(EventRepository eventRepository) {
+    public DbStorageService(IEventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
