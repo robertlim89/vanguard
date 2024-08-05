@@ -11,6 +11,7 @@ Persists trade information into an H2 database and allows for users to perform q
 
 - `./gradlew build` - To build the application
 - `./gradlew bootRun` - To run. The trade information in the XML files will be automatically loaded on startup.
+- `./gradlew test` - To run the tests.
 
 ## Endpoints
 
